@@ -1,0 +1,32 @@
+repositories:
+- name: stable
+  url: https://charts.helm.sh/stable
+
+environments:
+  {{ .Environment.Name }}:
+    values:
+{{- if eq .Environment.Name "dev" }}
+ 
+releases:
+- name: caylent-{{ .Environment.Name }}
+  namespace: default
+  chart: ../{{ .Environment.Name }}-chart/
+  labels:
+    name: caylent-{{ .Environment.Name }}
+  version: 1.0.0
+  secrets:
+      - ../secrets.yaml
+
+{{- else if eq .Environment.Name "stage" }}
+
+releases:
+- name: caylent-{{ .Environment.Name }}
+  namespace: default
+  chart: ../{{ .Environment.Name }}-chart/
+  labels:
+    name: caylent-{{ .Environment.Name }}
+  version: 1.0.0
+  secrets:
+      - ../secrets.yaml
+
+{{- end }}
