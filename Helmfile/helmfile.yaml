@@ -9,7 +9,7 @@ environments:
  
 releases:
 - name: caylent-{{ .Environment.Name }}
-  namespace: default
+  namespace: dev
   chart: ../{{ .Environment.Name }}-chart/
   labels:
     name: caylent-{{ .Environment.Name }}
@@ -21,12 +21,12 @@ releases:
 
 releases:
 - name: caylent-{{ .Environment.Name }}
-  namespace: default
+  namespace: stage
   chart: ../{{ .Environment.Name }}-chart/
   labels:
     name: caylent-{{ .Environment.Name }}
   version: 1.0.0
   secrets:
-      - ../secrets.yaml
+      - ../stage-secrets.yaml
 
 {{- end }}
